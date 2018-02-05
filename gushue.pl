@@ -28,6 +28,7 @@ if (defined $fh) {
     my ($res, $err) = verify($receipt);
     if ($err ne "") {
       warn sprintf("encountered error at line %d: %s", $i, $err);
+      next;
     }
     print $res . "\n";
   }
