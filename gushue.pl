@@ -47,6 +47,7 @@ sub verify {
   my $receipt = shift;
 
   my $uri     = "https://buy.itunes.apple.com/verifyReceipt";
+  #my $uri     = "https://sandbox.itunes.apple.com/verifyReceipt";
   my $header  = ['Content-Type' => 'application/json; charset=UTF-8'];
   my $content = encode_json {"receipt-data" => $receipt};
 
