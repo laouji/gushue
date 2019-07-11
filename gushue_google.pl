@@ -49,6 +49,8 @@ sub parse_logline {
   my $logline = shift;
   if ($logline =~ /^[a-z0-9\-]*+\s\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}\.\d+.*\[.*gps_product_id\:\[(.*)\] gps_token\:\[(.*)\] sdk/) {
     return $1, $2;
+  #if ($logline =~ /^[a-z0-9\-]*+\s\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}\.\d+.*\[.*gps_token\:\[(.*)\] .*gps_product_id\:\[(.*)\] sdk/) {
+  #  return $2, $1;
   }
   return "", "";
 }
@@ -72,6 +74,7 @@ sub get_auth_token {
 sub verify {
   my ($auth_info, $package_name, $product_id, $purchase_token) = @_;
 
+  #my $uri = sprintf("https://www.googleapis.com/androidpublisher/v3/applications/%s/purchases/subscriptions/%s/tokens/%s",
   my $uri = sprintf("https://www.googleapis.com/androidpublisher/v2/applications/%s/purchases/products/%s/tokens/%s",
     $package_name,
     $product_id,

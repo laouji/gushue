@@ -37,7 +37,9 @@ $fh->close;
 
 sub parse_logline {
   my $logline = shift;
-  if ($logline =~ /^[a-z0-9\-]*+\s\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}\.\d+.*\[.*rcpt\:(.*)\s.*\]/) {
+  chomp($logline);
+  #if ($logline =~ /^[a-z0-9\-]*+\s\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}\.\d+.*\[.*receipt\:(.*)\s/) {
+  if ($logline =~ /^[a-z0-9\-]*+\s\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}\.\d+.*\[.*rcpt\:(.*)\stid/) {
     return $1;
   }
   return "";
@@ -50,6 +52,7 @@ sub verify {
   #my $uri     = "https://sandbox.itunes.apple.com/verifyReceipt";
   my $header  = ['Content-Type' => 'application/json; charset=UTF-8'];
   my $content = encode_json {"receipt-data" => $receipt};
+  #my $content = encode_json {"receipt-data" => $receipt, "password" => ""};
 
   my $http_client = Furl->new();
 
