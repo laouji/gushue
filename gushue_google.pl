@@ -51,7 +51,7 @@ if (defined $fh) {
     }
 
     if (!exists $products->{$product_id}) {
-      warn sprintf("warning for log line %d: %s is not a valid sku", $i $product_id);
+      warn sprintf("warning for log line %d: %s is not a valid sku", $i, $product_id);
     }
 
     my ($res, $err) = verify_purchase($auth_info, $package_name, $product_id, $gps_token);
